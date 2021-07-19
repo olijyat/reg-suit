@@ -1,0 +1,46 @@
+{
+  "private": true,
+  "name": "reg-suit",
+  "version": "0.0.1",
+  "repository": "https://github.com/olijyat/reg-suit",
+  "scripts": {
+    "clean": "rimraf \"packages/*/lib\"",
+    "build": "lerna run prepublish",
+    "bootstrap": "lerna bootstrap && yarn build",
+    "test": "lerna run test",
+    "prettier": "prettier \"*.md\" \"*.json\" \"*.yml\" \"packages/**/*\"",
+    "lint:eslint": "eslint \"packages/*/{src,e2e}/**/*.{ts,tsx}\"",
+    "format": "yarn prettier --write",
+    "format:check": "yarn prettier --check",
+    "lint": "run-s format:check lint:eslint",
+    "build:io": "cd packages/reg-suit-toppage; npm run build",
+    "deploy:io": "cd packages/reg-suit-toppage; npm run deploy",
+    "deploy:packages": "lerna publish --yes from-package",
+    "deploy": "run-s deploy:*",
+    "watch:interface": "tsc -w -p packages/reg-suit-interface/tsconfig.build.json",
+    "watch:core": "tsc -w -p packages/reg-suit-core/tsconfig.build.json",
+    "watch:cli": "tsc -w -p packages/reg-suit-cli/tsconfig.build.json",
+    "watch:util": "tsc -w -p packages/reg-suit-util/tsconfig.build.json",
+    "watch": "run-p watch:*",
+    "postinstall": "husky install"
+  },
+  "devDependencies": {
+    "@types/node": "14.17.4",
+    "@typescript-eslint/eslint-plugin": "4.26.1",
+    "@typescript-eslint/parser": "4.26.1",
+    "eslint": "7.29.0",
+    "eslint-config-prettier": "8.3.0",
+    "husky": "6.0.0",
+    "lerna": "4.0.0",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.3.2",
+    "pretty-quick": "3.1.1",
+    "rimraf": "3.0.2",
+    "ts-node": "10.0.0",
+    "typescript": "4.3.5",
+    "typescript-eslint-language-service": "4.1.4"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
